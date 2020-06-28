@@ -1,6 +1,32 @@
 name: Deno CI
 on: [push, pull_request]
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Deno
+      uses: denolib/setup-deno@master
+        with:
+          deno-version: 1.x
+      - name: Tests
+        run: deno lint --unstable
+
+  lint:
+    name: Check Lock
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Deno
+      uses: denolib/setup-deno@master
+        with:
+          deno-version: 1.x
+      - name: Tests
+        run: deno cache --lock=lock.json  --unstable src/riot/index.ts
+
   build:
     name: '${{ matrix.kind }} ${{ matrix.os }}'
     runs-on: '${{ matrix.os }}'

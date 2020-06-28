@@ -10,7 +10,7 @@ class RiotClient implements IRiotClient {
 	public baseUrl: string
 	#apiKey: string;
 
-	#blocked?: Promise<any>;
+	#blocked?: Promise<void>;
 
 	private constructor() {
 		this.baseUrl = config.API_BASE_URL;
@@ -34,6 +34,7 @@ class RiotClient implements IRiotClient {
 						u.searchParams.append(k, i.toString());
 					}
 				} else {
+           // eslint-disable-next-line @typescript-eslint/no-explicit-any
 					u.searchParams.set(k, (val as any).toString());
 				}
 			}

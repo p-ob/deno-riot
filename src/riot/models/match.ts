@@ -9,8 +9,10 @@ export class Match implements IMatch {
 	gameVersion: string;
 	mapId: number;
 	gameMode: string;
-	participants: Participant[];
-	participantIdentities: any[]
+  participants: Participant[];
+  // deno-lint-ignore no-explicit-any
+  participantIdentities: any[]
+  // deno-lint-ignore no-explicit-any
 	teams: any[];
 
 	constructor(src: IMatch) {
@@ -41,8 +43,10 @@ interface IMatch {
 	gameVersion: string;
 	mapId: number;
 	gameMode: string;
-	participants: IParticipant[];
-	participantIdentities: any[]
+  participants: IParticipant[];
+  // deno-lint-ignore no-explicit-any
+  participantIdentities: any[]
+  // deno-lint-ignore no-explicit-any
 	teams: any[];
 }
 
@@ -51,11 +55,13 @@ export class Participant implements IParticipant {
 	championId: number;
 	runes: Rune[];
 	stats: ParticipantStats;
-	teamId: number;
+  teamId: number;
+  // deno-lint-ignore no-explicit-any
 	timeline: any;
 	spell1Id: number;
 	spell2Id: number;
-	highestAchievedSeasonTier: string;
+  highestAchievedSeasonTier: string;
+  // deno-lint-ignore no-explicit-any
 	masteries: any[];
 
 	constructor(src: IParticipant) {
@@ -77,11 +83,13 @@ interface IParticipant {
 	championId: number;
 	runes: IRune[];
 	stats: IParticipantStats;
-	teamId: number;
+  teamId: number;
+  // deno-lint-ignore no-explicit-any
 	timeline: any;
 	spell1Id: number;
 	spell2Id: number;
-	highestAchievedSeasonTier: string;
+  highestAchievedSeasonTier: string;
+  // deno-lint-ignore no-explicit-any
 	masteries: any[];
 }
 

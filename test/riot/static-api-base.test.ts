@@ -11,7 +11,7 @@ class TestStaticApi extends StaticApiBase {
 const api = new TestStaticApi();
 
 Deno.test("loadsFromNetwork", async () => {
-  const body = {
+  const body: ITestBody = {
     test: 1
   };
 
@@ -27,14 +27,14 @@ Deno.test("loadsFromNetwork", async () => {
   const result = await api.get("network.json");
   assert(result !== undefined);
   assert(result !== null);
-  assert((result as any).test === body.test);
+  assert((result as ITestBody).test === body.test);
   globalThis.fetch = ogFetch;
 });
 
 Deno.test("loadsFromNetworkThenCache", async () => {
   const path = "networkthencache.json";
   let tries = 0;
-  const body = {
+  const body: ITestBody = {
     test: 1
   };
 
@@ -60,6 +60,10 @@ Deno.test("loadsFromNetworkThenCache", async () => {
   const result = await api.get(path);
   assert(result !== undefined);
   assert(result !== null);
-  assert((result as any).test === body.test);
+  assert((result as ITestBody).test === body.test);
   globalThis.fetch = ogFetch;
 });
+
+interface ITestBody {
+  test: number;
+}
