@@ -1,5 +1,4 @@
-import { SummonerApi } from "./summoner.ts";
-import { MatchApi } from "./match.ts";
+import { MatchApi, SummonerApi } from "./apis/index.ts";
 
 export class RiotApi {
 	matches: MatchApi;
@@ -10,5 +9,3 @@ export class RiotApi {
 		this.summoners = new SummonerApi();
 	}
 }
-
-

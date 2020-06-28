@@ -1,5 +1,5 @@
 // import { MatchApi } from "./apis/match.ts";
-import { RiotApi } from "./riot/index.ts";
+import { RiotApi } from "../src/index.ts";
 
 async function main() {
 	const api = new RiotApi();

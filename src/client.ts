@@ -1,5 +1,7 @@
 import { config } from "https://deno.land/x/dotenv/mod.ts";
 
+const riotTokenHeader = "X-Riot-Token";
+
 class RiotClient implements IRiotClient {
     private static _instance?: RiotClient;
 
@@ -36,7 +38,7 @@ class RiotClient implements IRiotClient {
 				}
 
         const headers = new Headers();
-        headers.set("X-Riot-Token", this.#apiKey);
+        headers.set(riotTokenHeader, this.#apiKey);
 
         return fetch(u.toString(), {
             headers
