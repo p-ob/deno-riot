@@ -1,14 +1,25 @@
 {
 	"version": "0.2.0",
 	"configurations": [
-			{
-					"name": "Deno",
-					"type": "node",
-					"request": "launch",
-					"cwd": "${workspaceFolder}",
-					"runtimeExecutable": "deno",
-					"runtimeArgs": ["run", "--inspect-brk", "--allow-read", "--allow-net", "--allow-write", "--unstable", "-A", "labs/index.ts"],
-					"port": 9229
-			}
+		{
+			"name": "Deno",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "deno",
+			"runtimeArgs": [
+				"run",
+				"--inspect-brk",
+				"--allow-read",
+				"--allow-net",
+				"--allow-write",
+				"--lock=lock.json",
+				"--lock-write",
+				"--unstable",
+				"-A",
+				"labs/index.ts"
+			],
+			"port": 9229
+		}
 	]
 }
