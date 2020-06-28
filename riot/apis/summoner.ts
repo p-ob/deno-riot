@@ -2,11 +2,11 @@ import { ApiBase } from "./base.ts";
 import { Summoner } from "../models/summoner.ts";
 import { RiotAPIError } from "../api-error.ts";
 
-class SummonerApi extends ApiBase {
+export class SummonerApi extends ApiBase {
 	private static _instance?: SummonerApi;
 	private _basePath: string;
 
-	private constructor() {
+	constructor() {
 		super();
 
 		this._basePath = "/lol/summoner/v4/summoners/"
@@ -27,7 +27,3 @@ class SummonerApi extends ApiBase {
 		}
 	}
 }
-
-const api = SummonerApi.instance;
-
-export { api as SummonerApi };

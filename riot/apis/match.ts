@@ -1,11 +1,11 @@
 import { RiotClient } from "../client.ts";
 import type { IRiotClient } from "../client.ts";
 
-class MatchApi {
+export class MatchApi {
 	#client: IRiotClient;
 	private static _instance?: MatchApi;
 
-	private constructor() {
+	constructor() {
 		this.#client = RiotClient;
 	}
 
@@ -17,7 +17,3 @@ class MatchApi {
 		throw new Error();
 	}
 }
-
-const api = MatchApi.instance;
-
-export { api as MatchApi };
