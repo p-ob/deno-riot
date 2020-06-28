@@ -27,4 +27,4 @@ jobs:
         with:
           deno-version: 1.x
       - name: Tests
-				run: deno test test/ --allow-read --allow-env --allow-net
+					run: deno test test/ --allow-read --allow-env --allow-net
