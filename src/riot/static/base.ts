@@ -1,5 +1,5 @@
 import { StaticRiotClient } from "./static-client.ts";
-import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { config } from "../config.ts";
 import { exists, readJson, writeJson, ensureFile } from "https://deno.land/std/fs/mod.ts";
 import { join } from "https://deno.land/std/path/mod.ts";
 import { RiotAPIError } from "../api-error.ts";
@@ -10,9 +10,8 @@ export abstract class StaticApiBase {
 	#cacheDir: string;
 
 	constructor() {
-		const c = config();
 		this.#client = StaticRiotClient;
-		this.#cacheDir = c.CACHE_DIR;
+		this.#cacheDir = config.CACHE_DIR;
 	}
 
 	protected async get(path: string): Promise<unknown> {
