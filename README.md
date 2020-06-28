@@ -4,7 +4,7 @@
 
 This repository holds multiple packages to communicate with the Riot APIs and store that data. This project is very much WIP.
 
-- [riot](./src/riot/README.md)
-- [data](.src/data/README.md)
+- [riot](./modules/riot/README.md)
+- [data](./modules/data/README.md)
 
 

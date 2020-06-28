@@ -50,7 +50,7 @@ Coming soon<sup>TM</sup>
 At the root, there's a small lab for consuming this package.
 
 ```shell
-> deno run --allow-read --allow-net --unstable --allow-write --lock=lock.json --lock-write --allow-env labs/index.ts
+> deno run --allow-read --allow-net --unstable --allow-write --lock=labs/lock.json --lock-write --allow-env labs/index.ts
 ```
 
 Debugging: --inspect

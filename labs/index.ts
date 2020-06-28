@@ -1,5 +1,5 @@
-import { RiotApi } from "../src/riot/index.ts";
 import "https://deno.land/x/dotenv/load.ts";
+import { RiotApi } from "../modules/riot/index.ts";
 
 async function main() {
 	const api = new RiotApi();

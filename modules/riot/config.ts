@@ -9,16 +9,16 @@ function buildConfig(): IConfig {
 	};
 }
 
-function assertDefined(value: string | undefined): asserts value is string {
+function assertDefined(value: string | undefined, variable: string): asserts value is string {
 	if (value === undefined) {
-		throw new Error("Environment value must be defined.");
+		throw new Error(`Environment variable '${variable}' must be defined.`);
 	}
 }
 
 function get(variable: string): string {
 	const value = Deno.env.get(variable);
 
-	assertDefined(value);
+	assertDefined(value, variable);
 
 	return value;
 }

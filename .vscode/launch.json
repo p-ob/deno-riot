@@ -9,13 +9,13 @@
 			"runtimeExecutable": "deno",
 			"runtimeArgs": [
 				"run",
-				"--inspect-brk",
+        "--inspect",
 				"--allow-read",
 				"--allow-net",
 				"--allow-write",
-				"--lock=lock.json",
+				"--lock=labs/lock.json",
 				"--lock-write",
-				"--unstable",
+        "--unstable",
 				"--allow-env",
 				"-A",
 				"labs/index.ts"
