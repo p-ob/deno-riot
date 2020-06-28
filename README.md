@@ -2,7 +2,7 @@
 
 Small library to consume the Riot APIs with [deno](https://deno.land/)
 
-![.github/workflows/deno.yml](https://github.com/p-ob/deno-riot/workflows/.github/workflows/deno.yml/badge.svg)
+![Deno CI](https://github.com/p-ob/deno-riot/workflows/Deno%20CI/badge.svg?branch=main)
 
 Add a .env file at the root, and provide the following information:
 - API_KEY
