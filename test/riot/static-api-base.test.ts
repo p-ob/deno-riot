@@ -1,3 +1,4 @@
+import "./env.ts";
 import { StaticApiBase } from "../../src/riot/static/base.ts";
 import { assert } from "https://deno.land/std/testing/asserts.ts";
 

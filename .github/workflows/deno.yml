@@ -15,10 +15,6 @@ jobs:
       GH_ACTIONS: true
       DENO_BUILD_MODE: release
       V8_BINARY: true
-      API_KEY: RGAPI-TEST
-      API_BASE_URL: 'https://www.example.com/apis/'
-      STATIC_BASE_URL: 'https://www.example.com/static/'
-      CACHE_DIR: ./.cache
     steps:
       - uses: actions/checkout@v2
       - name: Setup Deno
