@@ -9,7 +9,7 @@ export class SummonerApi extends ApiBase {
 	constructor() {
 		super();
 
-		this._basePath = "/lol/summoner/v4/summoners/"
+		this._basePath = "/lol/summoner/v4"
 	}
 
 	static get instance() {
@@ -17,11 +17,11 @@ export class SummonerApi extends ApiBase {
 	}
 
 	async getSummonerByName(name: string): Promise<Summoner> {
-		const p = `${this._basePath}by-name/${name}`;
+		const p = `${this._basePath}/summoners/by-name/${name}`;
 		const response = await this._client.get(p);
 		if (response.ok) {
 			const result = await response.json();
-			return Summoner.fromJSON(result);
+			return new Summoner(result);
 		} else {
 			throw new RiotAPIError("Error encountered trying to retrieve summoner.", response);
 		}

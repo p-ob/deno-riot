@@ -1,13 +1,17 @@
 import { config } from "https://deno.land/x/dotenv/mod.ts";
 
 const riotTokenHeader = "X-Riot-Token";
+const appRateLimitHeader = "X-App-Rate-Limit";
+const appRateLimitCountHeader = "X-App-Rate-Limit-Count";
 
 class RiotClient implements IRiotClient {
     private static _instance?: RiotClient;
 
     public baseUrl: string
 
-    #apiKey: string;
+		#apiKey: string;
+
+		#blocked?: Promise<any>;
 
     private constructor() {
         const c = config();
@@ -19,7 +23,10 @@ class RiotClient implements IRiotClient {
         return this._instance || (this._instance = new this());
     }
 
-    get(path: string, queryParams?: { [key: string]: unknown }): Promise<Response> {
+    async get(path: string, queryParams?: { [key: string]: unknown }): Promise<Response> {
+				if (this.#blocked) {
+					await this.#blocked;
+				}
         if (!path.startsWith("/")) {
             path = `/${path}`;
         }
@@ -40,16 +47,67 @@ class RiotClient implements IRiotClient {
         const headers = new Headers();
         headers.set(riotTokenHeader, this.#apiKey);
 
-        return fetch(u.toString(), {
+        const response = await fetch(u.toString(), {
             headers
-        });
-    }
+				});
+
+				const isRateLimited = this.isRateLimited(response);
+				if (isRateLimited) {
+					return this.get(path, queryParams);
+				}
+
+				return response;
+		}
+
+		private block(timeMs: number) {
+			this.#blocked = new Promise((resolve) => {
+				setTimeout(() => {
+					resolve();
+				}, timeMs);
+			});
+		}
+
+		private parseRateLimitHeaderValue(value: string | null): IRateLimitValuePair[] {
+			const result: IRateLimitValuePair[] = [];
+			if (value) {
+				const splitVal = value.split(",");
+				for (const v of splitVal) {
+					const innerSplit = v.split(":");
+					result.push({
+						count: Number(innerSplit[0]),
+						interval: Number(innerSplit[1])
+					});
+				}
+			}
+
+			return result;
+		}
+
+		private isRateLimited(response: Response): boolean {
+			const rateLimitHeaderValue = response.headers.get(appRateLimitHeader);
+			const rateLimitCountHeaderValue = response.headers.get(appRateLimitCountHeader);
+			const rateLimits = this.parseRateLimitHeaderValue(rateLimitHeaderValue);
+			const rateLimitCount = this.parseRateLimitHeaderValue(rateLimitCountHeaderValue);
+			for (const rl of rateLimitCount) {
+				const rateLimitRule = rateLimits.find(x => x.interval === rl.interval);
+				if (rl.count >= (rateLimitRule?.count ?? Number.MAX_SAFE_INTEGER)) {
+					this.block(rl.interval);
+					return true;
+				}
+			}
+			return false;
+		}
 }
 
 export interface IRiotClient {
 	baseUrl: string;
-	get(path: string, queryParams?: { [key: string]: unknown }): Promise<Response>;
+	get(path: string, queryParams?: object): Promise<Response>;
 }
 
 const client = RiotClient.instance;
 export { client as RiotClient };
+
+interface IRateLimitValuePair {
+	interval: number;
+	count: number;
+}
