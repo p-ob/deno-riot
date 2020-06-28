@@ -1,7 +1,7 @@
 import "./env.ts";
-import { RiotClient, riotTokenHeader, appRateLimitCountHeader, appRateLimitHeader } from "../../src/riot/apis/client.ts";
+import { RiotClient, riotTokenHeader, appRateLimitCountHeader, appRateLimitHeader } from "../../apis/client.ts";
 import { assert } from "https://deno.land/std/testing/asserts.ts";
-import { config } from "../../src/riot/config.ts";
+import { config } from "../../config.ts";
 
 
 Deno.test("appliesApiHeader", async () => {

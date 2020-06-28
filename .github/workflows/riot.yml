@@ -3,11 +3,9 @@ on:
   push:
     paths:
     - 'src/riot/**'
-    - 'test/riot/**'
   pull_request:
     paths:
     - 'src/riot/**'
-    - 'test/riot/**'
 
 jobs:
   lint:
@@ -21,9 +19,7 @@ jobs:
         with:
           deno-version: 1.x
       - name: Lint
-        run: |
-          deno lint src/riot/ --unstable
-          deno lint test/riot/ --unstable
+        run: deno lint src/riot/ --unstable
 
   lock:
     name: Check Lock
@@ -59,4 +55,4 @@ jobs:
         with:
           deno-version: 1.x
       - name: Tests
-        run: deno test test/riot/ --allow-read --allow-write --unstable --allow-env --allow-net
+        run: deno test src/riot/ --allow-read --allow-write --unstable --allow-env --allow-net
