@@ -26,4 +26,4 @@ jobs:
         with:
           deno-version: 1.x
       - name: Tests
-        run: deno test test/ --allow-read --allow-write --unstable --allow-env --allow-net --lock=lock.json
+        run: deno test test/ --allow-read --allow-write --unstable --allow-env --allow-net
