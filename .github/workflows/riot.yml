@@ -32,7 +32,7 @@ jobs:
         with:
           deno-version: 1.x
       - name: Lock validate
-        run: deno cache --lock=modules/riot/lock.json  --unstable modules/riot/index.ts
+        run: deno cache --lock=modules/riot/lock.json  --unstable modules/riot/mod.ts
 
   test:
     name: '${{ matrix.kind }} ${{ matrix.os }}'
