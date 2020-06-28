@@ -1,5 +1,10 @@
-name: Deno CI
-on: [push, pull_request]
+name: Riot CI
+on:
+  [push, pull_request]
+    paths:
+    - 'src/riot/**'
+    - 'test/riot/**'
+
 jobs:
   lint:
     name: Lint
@@ -12,7 +17,9 @@ jobs:
         with:
           deno-version: 1.x
       - name: Lint
-        run: deno lint --unstable
+        run: |
+          deno lint src/riot/ --unstable
+          deno lint test/riot/ --unstable
 
   lock:
     name: Check Lock
@@ -25,7 +32,7 @@ jobs:
         with:
           deno-version: 1.x
       - name: Lock validate
-        run: deno cache --lock=lock.json  --unstable src/riot/index.ts
+        run: deno cache --lock=src/riot/lock.json  --unstable src/riot/index.ts
 
   build:
     name: '${{ matrix.kind }} ${{ matrix.os }}'
@@ -48,4 +55,4 @@ jobs:
         with:
           deno-version: 1.x
       - name: Tests
-        run: deno test test/ --allow-read --allow-write --unstable --allow-env --allow-net
+        run: deno test test/riot/ --allow-read --allow-write --unstable --allow-env --allow-net
