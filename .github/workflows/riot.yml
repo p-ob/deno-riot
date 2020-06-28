@@ -1,6 +1,10 @@
 name: Riot CI
 on:
-  [push, pull_request]
+  push:
+    paths:
+    - 'src/riot/**'
+    - 'test/riot/**'
+  pull_request:
     paths:
     - 'src/riot/**'
     - 'test/riot/**'
