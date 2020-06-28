@@ -22,7 +22,7 @@ export abstract class StaticApiBase {
 		const response = await this.#client.get(path);
 		if (response.ok) {
 			const result = await response.json();
-			this.addCache(path, result);
+			await this.addCache(path, result);
 			return result;
 		} else {
 			throw new RiotAPIError("Error encountered loading static assets.", response);

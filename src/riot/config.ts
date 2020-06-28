@@ -4,7 +4,6 @@ export const config = buildConfig();
 
 function buildConfig(): IConfig {
 	return {
-		APP_ID: get("APP_ID"),
 		API_KEY: get("API_KEY"),
 		API_BASE_URL: get("API_BASE_URL"),
 		STATIC_BASE_URL: get("STATIC_BASE_URL"),
@@ -28,7 +27,6 @@ function get(variable: string): string {
 
 
 interface IConfig {
-	APP_ID: string;
 	API_KEY: string;
 	API_BASE_URL: string;
 	STATIC_BASE_URL: string;

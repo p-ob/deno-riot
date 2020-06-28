@@ -15,7 +15,6 @@ jobs:
       GH_ACTIONS: true
       DENO_BUILD_MODE: release
       V8_BINARY: true
-      APP_ID: 12345
       API_KEY: RGAPI-TEST
       API_BASE_URL: 'https://www.example.com/apis/'
       STATIC_BASE_URL: 'https://www.example.com/static/'
@@ -27,4 +26,4 @@ jobs:
         with:
           deno-version: 1.x
       - name: Tests
-        run: deno test test/ --allow-read --allow-env --allow-net
+        run: deno test test/ --allow-read --allow-write --unstable --allow-env --allow-net --lock=lock.json

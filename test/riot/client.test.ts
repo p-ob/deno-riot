@@ -39,3 +39,50 @@ Deno.test("appliesRateLimiting", async () => {
 	assert(tries > 1, `Expected API call to retry blocked call. Tries: ${tries}`);
 	globalThis.fetch = ogFetch;
 });
+
+Deno.test("setsBasicQueryParams", async () => {
+  let url: URL | undefined = undefined;
+  const ogFetch = globalThis.fetch;
+	globalThis.fetch = (input: string | Request | URL, init?: RequestInit) => {
+    if (input instanceof Request) {
+      url = new URL(input.url);
+    } else {
+      url = new URL(input);
+    }
+		return Promise.resolve(new Response());
+  }
+
+  const _response = await RiotClient.get("test", { q: "val" });
+
+  assert(url !== undefined);
+  assert(url!.searchParams !== undefined);
+  assert(url!.searchParams.get("q") === "val");
+
+  globalThis.fetch = ogFetch;
+});
+
+Deno.test("setsArrayQueryParams", async () => {
+  let url: URL | undefined = undefined;
+  const ogFetch = globalThis.fetch;
+	globalThis.fetch = (input: string | Request | URL, init?: RequestInit) => {
+    if (input instanceof Request) {
+      url = new URL(input.url);
+    } else {
+      url = new URL(input);
+    }
+		return Promise.resolve(new Response());
+  }
+
+  const values = ["val1", "val2"];
+  const _response = await RiotClient.get("test", { q: ["val1", "val2"] });
+
+  assert(url !== undefined);
+  assert(url!.searchParams !== undefined);
+
+  const qs = url!.searchParams.getAll("q");
+  for (const val of values) {
+    assert(qs.includes(val));
+  }
+
+  globalThis.fetch = ogFetch;
+});
