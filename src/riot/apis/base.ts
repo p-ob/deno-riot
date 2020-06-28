@@ -2,9 +2,13 @@ import { RiotClient } from "./client.ts";
 import type { IRiotClient } from "./client.ts";
 
 export abstract class ApiBase {
-	protected _client: IRiotClient;
+	#client: IRiotClient;
 
 	constructor() {
-		this._client = RiotClient;
+		this.#client = RiotClient;
+	}
+
+	protected get(path: string, params?: object) {
+		return this.#client.get(path, params);
 	}
 }

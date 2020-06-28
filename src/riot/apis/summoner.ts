@@ -4,12 +4,12 @@ import { RiotAPIError } from "../api-error.ts";
 
 export class SummonerApi extends ApiBase {
 	private static _instance?: SummonerApi;
-	private _basePath: string;
+	#basePath: string;
 
 	constructor() {
 		super();
 
-		this._basePath = "/lol/summoner/v4"
+		this.#basePath = "/lol/summoner/v4"
 	}
 
 	static get instance() {
@@ -17,8 +17,8 @@ export class SummonerApi extends ApiBase {
 	}
 
 	async getSummonerByName(name: string): Promise<Summoner> {
-		const p = `${this._basePath}/summoners/by-name/${name}`;
-		const response = await this._client.get(p);
+		const p = `${this.#basePath}/summoners/by-name/${name}`;
+		const response = await this.get(p);
 		if (response.ok) {
 			const result = await response.json();
 			return new Summoner(result);

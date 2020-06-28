@@ -5,12 +5,12 @@ import { RiotAPIError } from "../api-error.ts";
 
 export class MatchApi extends ApiBase {
 	private static _instance?: MatchApi;
-	private _basePath: string;
+	#basePath: string;
 
 	constructor() {
 		super();
 
-		this._basePath = "/lol/match/v4"
+		this.#basePath = "/lol/match/v4"
 	}
 
 	static get instance() {
@@ -18,8 +18,8 @@ export class MatchApi extends ApiBase {
 	}
 
 	async getMatch(id: number): Promise<Match> {
-		const p = `${this._basePath}/matches/${id}`;
-		const response = await this._client.get(p);
+		const p = `${this.#basePath}/matches/${id}`;
+		const response = await this.get(p);
 		if (response.ok) {
 			const result = await response.json();
 			return new Match(result);
@@ -29,8 +29,8 @@ export class MatchApi extends ApiBase {
 	}
 
 	async getMatchListByAccount(accountId: string, params?: IMatchListQueryParams): Promise<MatchList> {
-		const p = `${this._basePath}/matchlists/by-account/${accountId}`;
-		const response = await this._client.get(p, params);
+		const p = `${this.#basePath}/matchlists/by-account/${accountId}`;
+		const response = await this.get(p, params);
 		if (response.ok) {
 			const result = await response.json();
 			return new MatchList(result);
