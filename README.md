@@ -4,7 +4,7 @@ Add a .env file at the root, and provide the following information:
 - API_BASE_URL (e.g. https://na1.api.riotgames.com/)
 
 ```shell
-> deno run --allow-read --allow-net --unstable --allow-write --lock=lock.json --lock-write labs/index.ts
+> deno run --allow-read --allow-net --unstable --allow-write --lock=lock.json --lock-write --allow-env labs/index.ts
 ```
 
 Debugging: --inspect

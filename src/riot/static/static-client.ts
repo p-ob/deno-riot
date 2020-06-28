@@ -1,12 +1,11 @@
-import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { config } from "../config.ts";
 
 class StaticRiotClient implements IStaticRiotClient {
 	private static _instance?: IStaticRiotClient;
 	public baseUrl: string
 
 	private constructor() {
-		const c = config();
-		this.baseUrl = c.STATIC_BASE_URL;
+		this.baseUrl = config.STATIC_BASE_URL;
 	}
 
 	static get instance() {

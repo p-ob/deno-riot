@@ -16,6 +16,7 @@
 				"--lock=lock.json",
 				"--lock-write",
 				"--unstable",
+				"--allow-env",
 				"-A",
 				"labs/index.ts"
 			],

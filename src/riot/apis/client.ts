@@ -1,22 +1,20 @@
-import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { config } from "../config.ts";
 
-const riotTokenHeader = "X-Riot-Token";
-const appRateLimitHeader = "X-App-Rate-Limit";
-const appRateLimitCountHeader = "X-App-Rate-Limit-Count";
+export const riotTokenHeader = "X-Riot-Token";
+export const appRateLimitHeader = "X-App-Rate-Limit";
+export const appRateLimitCountHeader = "X-App-Rate-Limit-Count";
 
 class RiotClient implements IRiotClient {
 	private static _instance?: RiotClient;
 
 	public baseUrl: string
-
 	#apiKey: string;
 
 	#blocked?: Promise<any>;
 
 	private constructor() {
-		const c = config();
-		this.baseUrl = c.API_BASE_URL;
-		this.#apiKey = c.API_KEY;
+		this.baseUrl = config.API_BASE_URL;
+		this.#apiKey = config.API_KEY;
 	}
 
 	static get instance() {
