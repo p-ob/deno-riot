@@ -1,5 +1,5 @@
-import { RiotClient } from "../client.ts";
-import type { IRiotClient } from "../client.ts";
+import { RiotClient } from "./client.ts";
+import type { IRiotClient } from "./client.ts";
 
 export abstract class ApiBase {
 	protected _client: IRiotClient;
