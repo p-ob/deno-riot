@@ -1,13 +1,13 @@
 import "./env.ts";
-import { RiotClient, riotTokenHeader, appRateLimitCountHeader, appRateLimitHeader } from "../../apis/client.ts";
+import { RiotClient, riotTokenHeader, appRateLimitCountHeader, appRateLimitHeader } from "../apis/client.ts";
 import { assert } from "https://deno.land/std/testing/asserts.ts";
-import { config } from "../../config.ts";
+import { config } from "../config.ts";
 
 
 Deno.test("appliesApiHeader", async () => {
 	let headers: Headers | undefined = undefined;
 	const ogFetch = globalThis.fetch;
-	globalThis.fetch = (input: string | Request | URL, init?: RequestInit) => {
+	globalThis.fetch = (_input: string | Request | URL, init?: RequestInit) => {
 		headers = new Headers(init?.headers);
 		return Promise.resolve(new Response());
 	}

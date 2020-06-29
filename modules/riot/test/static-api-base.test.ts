@@ -1,5 +1,5 @@
 import "./env.ts";
-import { StaticApiBase } from "../../static/base.ts";
+import { StaticApiBase } from "../static/base.ts";
 import { assert } from "https://deno.land/std/testing/asserts.ts";
 
 class TestStaticApi extends StaticApiBase {
